@@ -22,7 +22,7 @@ export const {
             red500: "#ab222e",
             red300: "#f75a68",
             red700: "#970809",
-            green300: "#00b37e",
+            orange300: "#fa8700",
         },
         fontSizes: {
             md: '1.125rem',

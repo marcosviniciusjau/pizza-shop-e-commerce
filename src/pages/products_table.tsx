@@ -1,4 +1,4 @@
-import { Button, HomeContainer, Product, Input } from "@/styles/pages/home";
+import { Button, HomeContainer, Product } from "@/styles/pages/home";
 import Link from "next/link";
 
 import Image from "next/image";
@@ -7,7 +7,6 @@ import { useKeenSlider } from "keen-slider/react";
 
 import "keen-slider/keen-slider.min.css";
 import { Product as Products } from "use-shopping-cart/core";
-import { useState } from "react";
 interface ProductsTableProps {
   products: Products[];
 }
@@ -21,16 +20,17 @@ export function ProductsTable({ products }: ProductsTableProps) {
   });
 
   return (
-    <HomeContainer ref={sliderRef} className="keen-slider">
+    <HomeContainer>
       {products.map((product) => {
         return (
           <Link
             href={`/products/${product.description}`}
             key={product.description}
             prefetch={false}
+            style={{ textDecoration: 'none' }}
           >
-            <Product className="keen-slider__slide">
-              <Image src={product.imageUrl} width={400} height={400} alt="" />
+            <Product>
+              <Image src={product.imageUrl} width={400} height={400} alt={product.name}/>
               <footer>
                 <strong>{product.name}</strong>
                 <span>A partir de {product.price}</span>

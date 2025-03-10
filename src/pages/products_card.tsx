@@ -1,4 +1,4 @@
-import { Button, FlavorContainer, HomeContainer, Product, ProductContainer } from "@/styles/pages/home";
+import { Button, FlavorContainer, Product, ProductContainer } from "@/styles/pages/product";
 
 import Image from "next/image";
 
@@ -9,7 +9,6 @@ import { CartActions } from "use-shopping-cart";
 import { Product as Products } from "use-shopping-cart/core";
 
 import { useState } from "react";
-import { useRouter } from "next/router";
 interface ProductsCardsProps {
   products: Products[];
   addItem: CartActions["addItem"];
@@ -82,7 +81,7 @@ export function ProductsCard({ products, addItem }: ProductsCardsProps) {
               // eslint-disable-next-line react/jsx-key
               <>
                 <Product
-                  className="keen-slider__slide"
+                  key={product.id}
                   disabled={!selectedProducts.includes(product)}
                 >
                   <Image

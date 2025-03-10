@@ -17,10 +17,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <Container>
       <CartProvider
-        mode="payment"
         cartMode="checkout-session"
         stripe={publicKey}
         currency="BRL"
+        shouldPersist
       >
         <Header>
           <Link href={`/`} prefetch={false}>

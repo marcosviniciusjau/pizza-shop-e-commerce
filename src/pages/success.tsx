@@ -9,7 +9,7 @@ import Head from "next/head";
 
 import { pizzaApi } from "@/lib/pizza-api";
 import { env } from "@/env";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 interface SuccessProps {
   customerName: string;
   customerEmail: string;
@@ -26,9 +26,12 @@ export default function Success({
   product,
 }: SuccessProps) {
   const [categoryType, setCategoryType] = useState("");
-  if (product.category === "pizzas") {
-    setCategoryType("pizza de");
-  }
+  useEffect(()=>{
+    if (product.category === "pizzas") {
+      setCategoryType("Pizza");
+    }
+  },[product.category])
+
 
   return (
     <>
@@ -47,7 +50,7 @@ export default function Success({
         <p>
           Uhuul <strong>{customerName}</strong>, sua{" "}
           <strong>
-            Sua {categoryType} {product.name}
+           {categoryType} {product.name}
           </strong>{" "}
           já foi comprada e já está sendo preparada para entrega!
         </p>
@@ -87,7 +90,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const size = product.metadata.size;
 
   const productId = product.id;
-  const response = await pizzaApi.post(
+  /**
+   * const response = await pizzaApi.post(
     `/restaurants/${env.NEXT_RESTAURANT_ID}/orders/`,
     {
       customerName,
@@ -103,6 +107,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       },
     };
   }
+   */
+  
   return {
     props: {
       customerName,

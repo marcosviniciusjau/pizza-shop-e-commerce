@@ -1,81 +1,116 @@
+import { styled } from ".."
 
-import { styled } from "..";
-
-export const ProductContainer = styled('main', {
-  gridTemplateColumns: '1fr 1fr',
-  alignItems: 'stretch',
-  gap: '4rem',
-  margin: '0 auto'
+export const HomeContainer = styled("main", {
+  display: "flex",
+  width: "100%",
+   maxWidth: "calc(100vw - ((100vw - 1180px) / 2))",
+  marginLeft: "auto",
+  minHeight: 200,
 })
 
-export const ImageContainer = styled('div', {
-  background: '#fa8700',
-  width: '40%',
-  maxWidth: 200,
-  height: 200,
-  borderRadius: 8,
-  padding: '0.25rem',
-
+export const ProductContainer = styled("div", {
   display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  flexWrap: 'wrap',
+  gap: '1rem',
 
-  img: {
-    objectFit: 'cover',
+  '& > div': {
+    flex: '1 0 20%', // 5 por linha (100 / 5 = 20%)
+  },
+  '@media(max-width: 768px)': {
+    display: 'grid'
   }
+
+})
+export const FlavorContainer = styled("div", {
+  marginLeft: '2rem',
+  maxWidth: '150px'
 })
 
-export const ProductDetails = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
 
-  h1: {
-    fontSize: '$2xl',
-    color: '$gray300',
+export const Product = styled("div", {
+  marginLeft: '2rem',
+  background: 'linear-gradient(180deg, #970809 0%, #fa8700 100%)',
+  borderRadius: 8,
+  position: "relative",
+  overflow: "hidden",
+  '@media(min-width: 768px)': {
+    margin: '2rem',
+    flexDirection: 'row',
+    alignItems: "center",
+    justifyContent: "center",
   },
 
-  span: {
-    marginTop: '1rem',
-    display: 'block',
-    fontSize: '$2xl',
-    color: 'linear-gradient(180deg, #ffd700 0%, #ff0000 100%)',
+  variants: {
+    disabled: {
+      true: {
+
+        background: 'none',
+        cursor: 'default',
+        opacity: 0.4,
+      },
+
+    },
+  },
+  img: {
+    borderRadius: '8px',
+    marginLeft: '1rem',
+    marginRight: '1rem',
+    marginTop: '0.75rem',
+    objectFit: "cover",
   },
 
-  p: {
-    marginTop: '2.5rem',
-    fontSize: '$md',
-    lineHeight: 1.6,
-    color: '$gray300',
-  },
+  footer: {
+    bottom: "0.25rem",
+    left: "0.25rem",
+    right: "0.25rem",
+    marginTop: "1rem",
+    borderRadius: 6,
 
-  button: {
-    marginTop: 'auto',
-    backgroundColor: '$red700',
-    border: 0,
-    color: '$white',
-    borderRadius: 8,
-    padding: '1.25rem',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-    fontSize: '$md',
+    padding: "0.5rem",
+    alignItems: "center",
+    justifyContent: "space-between",
 
-    '&:disabled': {
-      opacity: 0.6,
-      cursor: 'not-allowed',
+
+    strong: {
+      fontSize: "$lg",
+      color: "$white",
     },
 
-    '&:not(:disabled):hover': {
-      backgroundColor: 'linear-gradient(180deg, #ffd700 0%, #ff0000 100%)',
+    span: {
+      fontSize: "$xl",
+      fontWeight: "bold",
+      color: "$white",
     }
   },
+
+  "&:hover": {
+    footer: {
+      opacity: 1,
+      transform: "translateY(0)",
+    }
+  },
+
 })
 
-export const Select = styled('select', {
-  marginLeft: '15px',
-  fontSize: '$md',
-  border: '1px solid $gray300',
-  borderRadius: 4,
-  padding: '0.75rem',
-  backgroundColor: '$gray900',
-  color: '$gray300',
+export const Input = styled("input", {
+  marginBottom: 25,
+  marginLeft: 30,
+  width: "25%",
+  height: 54,
+  borderRadius: 6,
+  backgroundColor: "$gray100",
+  border: "1px solid rgba(0,0,0,0.2)",
+})
+
+export const Button = styled("button", {
+  height: 54,
+  marginTop: 16,
+  marginLeft: 5,
+  borderRadius: 6,
+  backgroundColor: "$red700",
+  border: 0,
+  color: "$white",
+  fontWeight: "bold",
+  cursor: "pointer",
+  transition: "background-color 0.2s",
 })
