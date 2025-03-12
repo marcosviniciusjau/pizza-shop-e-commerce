@@ -21,17 +21,13 @@ interface SuccessProps {
     imageUrl: string;
   };
 }
-export default function Success({
-  customerName,
-  product,
-}: SuccessProps) {
+export default function Success({ customerName, product }: SuccessProps) {
   const [categoryType, setCategoryType] = useState("");
-  useEffect(()=>{
+  useEffect(() => {
     if (product.category === "pizzas") {
       setCategoryType("Pizza");
     }
-  },[product.category])
-
+  }, [product.category]);
 
   return (
     <>
@@ -50,7 +46,7 @@ export default function Success({
         <p>
           Uhuul <strong>{customerName}</strong>, sua{" "}
           <strong>
-           {categoryType} {product.name}
+            {categoryType} {product.name}
           </strong>{" "}
           já foi comprada e já está sendo preparada para entrega!
         </p>
@@ -90,25 +86,23 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const size = product.metadata.size;
 
   const productId = product.id;
-  /**
-   * const response = await pizzaApi.post(
-    `/restaurants/${env.NEXT_RESTAURANT_ID}/orders/`,
+  const response = await pizzaApi.post(
+    `${env.NEXT_API_BASE_URL}/restaurants/${env.NEXT_RESTAURANT_ID}/orders/`,
     {
       customerName,
       customerEmail,
-      items: [{ productId, name, quantity, price, category, size }],
+      items: [
+        { productId, name, quantity, price: "teste ruim", category, size },
+      ],
     }
   );
-  if (response.status !== 201) {
-    return {
-      redirect: {
-        destination: "/error",
-        permanent: false,
-      },
-    };
-  }
-   */
-  
+
+  // Se quiser o response.data:
+  const responseStatus = response.status;
+  const responseData = response.data;
+
+  console.log('Response Status:', responseStatus);
+  console.log('Response Data:', responseData);
   return {
     props: {
       customerName,
