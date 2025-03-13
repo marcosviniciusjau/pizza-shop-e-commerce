@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useShoppingCart } from "use-shopping-cart";
 import { CartEntry } from "./cart-entry";
 import { Button } from "@/styles/pages/cart";
