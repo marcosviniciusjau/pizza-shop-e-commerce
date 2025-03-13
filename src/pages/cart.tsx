@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useShoppingCart } from "use-shopping-cart";
-import { CartEntry } from "./cart-entry";
+import CartEntry from "./cart-entry";
 import { Button } from "@/styles/pages/cart";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -62,7 +62,6 @@ export default function Cart() {
 
         if (prices.data.length === 0) {
           await stripe.products.del(product.id);
-          console.log(`Produto deletado: ${product.id}`);
         }
       }
     } catch (error) {
@@ -95,7 +94,6 @@ export default function Cart() {
             limit: 100,
             query: `lookup_key:"${productMostExpensive[0].priceId}"`,
           });
-          console.log(priceName);
           if (priceName.data.length < 1) {
             const newPrice = await stripe.prices.create({
               currency: "brl",

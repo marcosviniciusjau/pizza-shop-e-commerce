@@ -14,7 +14,7 @@ interface ProductsCardsProps {
   addItem: CartActions["addItem"];
 }
 
-export  default function ProductsCard({ products, addItem }: ProductsCardsProps) {
+export default function ProductsCard({ products, addItem }: ProductsCardsProps) {
   const [selectedProducts, setSelectedProducts] = useState<Products[]>([]);
 
   const [sliderRef] = useKeenSlider({

@@ -6,10 +6,9 @@ import { useKeenSlider } from "keen-slider/react";
 
 import "keen-slider/keen-slider.min.css";
 
-import Stripe from "stripe";
 import { CartActions, useShoppingCart } from "use-shopping-cart";
 import { stripe } from "@/lib/stripe";
-import { ProductsCard } from "../products_card";
+import ProductsCard  from "../products_card";
 
 import type { Product as Products } from "use-shopping-cart/core";
 import { useState } from "react";
@@ -20,7 +19,6 @@ interface ProductsCardsProps {
 }
 
 export default function Products({ products }: ProductsCardsProps) {
-  console.log("products do descripotion", products)
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
@@ -98,7 +96,6 @@ export const getServerSideProps: GetStaticProps<
   { description: string }
 > = async ({ params }) => {
   const description = params!.description;
-  console.log(description);
   const productsResponse = await stripe.products.list({
     expand: ["data.default_price"],
   });

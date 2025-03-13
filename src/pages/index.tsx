@@ -5,7 +5,7 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 
 import { Product as Products } from "use-shopping-cart/core";
-import { ProductsTable } from "./products_table";
+import ProductsTable  from "./products_table";
 import { HomeContainer } from "@/styles/pages/home";
 
 export default function Home() {
