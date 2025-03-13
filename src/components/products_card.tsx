@@ -8,9 +8,6 @@ import {
 
 import Image from "next/image";
 
-import { useKeenSlider } from "keen-slider/react";
-
-import "keen-slider/keen-slider.min.css";
 import { CartActions } from "use-shopping-cart";
 import { Product as Products } from "use-shopping-cart/core";
 
@@ -20,18 +17,9 @@ interface ProductsCardsProps {
   addItem: CartActions["addItem"];
 }
 
-export default function ProductsCard({
-  products,
-  addItem,
-}: ProductsCardsProps) {
+export function ProductsCard({ products, addItem }: ProductsCardsProps) {
   const [selectedProducts, setSelectedProducts] = useState<Products[]>([]);
 
-  const [sliderRef] = useKeenSlider({
-    slides: {
-      perView: 3,
-      spacing: 48,
-    },
-  });
   function selectPizza(isChecked: boolean, product: Products) {
     const productId = product.id;
     setSelectedProducts((prev) =>

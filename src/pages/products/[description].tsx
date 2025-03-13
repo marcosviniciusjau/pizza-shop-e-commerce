@@ -5,7 +5,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { CartActions, useShoppingCart } from "use-shopping-cart";
 import { stripe } from "@/lib/stripe";
 
-import ProductsCard from "../products_card";
+import { ProductsCard } from "@/components/products_card";
 
 import type { Product as Products } from "use-shopping-cart/core";
 import { useState } from "react";
