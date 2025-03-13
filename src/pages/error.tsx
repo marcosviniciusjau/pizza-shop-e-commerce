@@ -3,12 +3,15 @@ import { ErrorContainer } from "@/styles/pages/error";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Error() {
   const router = useRouter();
-  if (!router.query.session_id) {
-    router.push("/");
-  }
+  useEffect(() => {
+    if (!router.query.session_id) {
+      router.push("/");
+    }
+  }, [router]);
 
   return (
     <>

@@ -12,31 +12,32 @@ interface ProductsTableProps {
 export default function ProductsTable({ products }: ProductsTableProps) {
   return (
     <HomeContainer>
-      {products.map((product) => {
-        return (
-          <Link
-            href={`/products/${product.description}`}
-            key={product.description}
-            prefetch={false}
-            style={{ textDecoration: "none" }}
-          >
-            <Product>
-              <Image
-                src={product.imageUrl}
-                width={400}
-                height={400}
-                alt={product.name}
-              />
-              <footer>
-                <strong>{product.name}</strong>
-                <span>A partir de {product.price}</span>
+      {products.length > 0 &&
+        products.map((product) => {
+          return (
+            <Link
+              href={`/products/${product.description}`}
+              key={product.description}
+              prefetch={false}
+              style={{ textDecoration: "none" }}
+            >
+              <Product>
+                <Image
+                  src={product.imageUrl}
+                  width={400}
+                  height={400}
+                  alt={product.name}
+                />
+                <footer>
+                  <strong>{product.name}</strong>
+                  <span>A partir de {product.price}</span>
 
-                <Button>Selecionar</Button>
-              </footer>
-            </Product>
-          </Link>
-        );
-      })}
+                  <Button>Selecionar</Button>
+                </footer>
+              </Product>
+            </Link>
+          );
+        })}
     </HomeContainer>
   );
 }
