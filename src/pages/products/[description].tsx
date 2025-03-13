@@ -1,31 +1,20 @@
 import { Button, HomeContainer, Input } from "@/styles/pages/home";
 
-import { GetStaticProps } from "next";
-
-import { useKeenSlider } from "keen-slider/react";
-
-import "keen-slider/keen-slider.min.css";
+import { GetStaticPaths, GetStaticProps } from "next";
 
 import { CartActions, useShoppingCart } from "use-shopping-cart";
 import { stripe } from "@/lib/stripe";
-import ProductsCard  from "../products_card";
+
+import ProductsCard from "../products_card";
 
 import type { Product as Products } from "use-shopping-cart/core";
 import { useState } from "react";
-import { useRouter } from "next/router";
 interface ProductsCardsProps {
   products: Products[];
   addItem: CartActions["addItem"];
 }
 
 export default function Products({ products }: ProductsCardsProps) {
-  const [sliderRef] = useKeenSlider({
-    slides: {
-      perView: 3,
-      spacing: 48,
-    },
-  });
-
   const [isSearching, setIsSearching] = useState(true);
   const [search, setSearch] = useState("");
 
@@ -91,7 +80,13 @@ export default function Products({ products }: ProductsCardsProps) {
   );
 }
 
-export const getServerSideProps: GetStaticProps<
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [{ params: { description: "big" } }],
+    fallback: "blocking",
+  };
+};
+export const getStaticProps: GetStaticProps<
   any,
   { description: string }
 > = async ({ params }) => {
@@ -127,5 +122,7 @@ export const getServerSideProps: GetStaticProps<
     props: {
       products: productsWithActivePrices,
     },
+
+    revalidate: 60 * 60 * 2, // 2 hours,
   };
 };

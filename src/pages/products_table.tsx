@@ -3,22 +3,12 @@ import Link from "next/link";
 
 import Image from "next/image";
 
-import { useKeenSlider } from "keen-slider/react";
-
-import "keen-slider/keen-slider.min.css";
 import { Product as Products } from "use-shopping-cart/core";
 interface ProductsTableProps {
   products: Products[];
 }
 
 export default function ProductsTable({ products }: ProductsTableProps) {
-  const [sliderRef, sliderInstance] = useKeenSlider<HTMLDivElement>({
-    slides: {
-      perView: 3,
-      spacing: 48,
-    },
-  });
-
   return (
     <HomeContainer>
       {products.map((product) => {
