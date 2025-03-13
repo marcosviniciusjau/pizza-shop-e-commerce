@@ -3,11 +3,9 @@ import Link from "next/link";
 import { stripe } from "@/lib/stripe";
 import Stripe from "stripe";
 import Image from "next/image";
-
 import { ImageContainer, SuccessContainer } from "@/styles/pages/success";
 import Head from "next/head";
-
-import { pizzaApi } from "@/lib/pizza-api";
+import superagent from "superagent";
 import { env } from "@/env";
 import { useEffect, useState } from "react";
 interface SuccessProps {
@@ -86,23 +84,42 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const size = product.metadata.size;
 
   const productId = product.id;
-  const response = await pizzaApi.post(
-    `${env.NEXT_API_BASE_URL}/restaurants/${env.NEXT_RESTAURANT_ID}/orders/`,
-    {
-      customerName,
-      customerEmail,
-      items: [
-        { productId, name, quantity, price: "teste ruim", category, size },
-      ],
+  try {
+    const response = await superagent
+      .post(
+        `${env.NEXT_API_BASE_URL}/restaurants/${env.NEXT_RESTAURANT_ID}/orders/`
+      )
+      .send({
+        customerName,
+        customerEmail,
+        items: [
+          { productId, name, quantity, price: "vai dar ruim!", category, size },
+        ],
+      });
+
+    if (response.status !== 201) {
+      console.error("Erro ao criar pedido na Pizza API:", response.status);
+      return {
+        redirect: {
+          destination: "/error",
+          permanent: false,
+        },
+      };
     }
-  );
-
-  // Se quiser o response.data:
-  const responseStatus = response.status;
-  const responseData = response.data;
-
-  console.log('Response Status:', responseStatus);
-  console.log('Response Data:', responseData);
+  } catch (err: any) {
+    console.error(
+      "Erro na requisição para Pizza API:",
+      err.message,
+      "Olha o erro",
+      err
+    );
+    return {
+      redirect: {
+        destination: "/error",
+        permanent: false,
+      },
+    };
+  }
   return {
     props: {
       customerName,
