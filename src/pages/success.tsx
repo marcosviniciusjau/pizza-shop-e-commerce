@@ -92,9 +92,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       .send({
         customerName,
         customerEmail,
-        items: [
-          { productId, name, quantity, price: "vai dar ruim!", category, size },
-        ],
+        items: [{ productId, name, quantity, price, category, size }],
       });
 
     if (response.status !== 201) {
