@@ -8,7 +8,6 @@ import { stripe } from "@/lib/stripe";
 import { CartContainer, Total } from "@/styles/pages/cart-entry";
 import { Select } from "@/styles/pages/components/select";
 import { CartDiv } from "@/styles/pages/components/cart";
-import { useRouter } from "next/router";
 
 export default function Cart() {
   const [isMounted, setIsMounted] = useState(false);

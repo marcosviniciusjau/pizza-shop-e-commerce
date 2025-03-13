@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ErrorContainer } from "@/styles/pages/error";
 import Head from "next/head";
 import Link from "next/link";

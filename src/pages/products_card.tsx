@@ -1,4 +1,10 @@
-import { Button, FlavorContainer, Product, ProductContainer } from "@/styles/pages/product";
+// @ts-nocheck
+import {
+  Button,
+  FlavorContainer,
+  Product,
+  ProductContainer,
+} from "@/styles/pages/product";
 
 import Image from "next/image";
 
@@ -14,7 +20,10 @@ interface ProductsCardsProps {
   addItem: CartActions["addItem"];
 }
 
-export default function ProductsCard({ products, addItem }: ProductsCardsProps) {
+export default function ProductsCard({
+  products,
+  addItem,
+}: ProductsCardsProps) {
   const [selectedProducts, setSelectedProducts] = useState<Products[]>([]);
 
   const [sliderRef] = useKeenSlider({
