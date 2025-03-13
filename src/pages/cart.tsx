@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useShoppingCart } from "use-shopping-cart";
-import CartEntry from "@/components/cart-entry";
+import { CartEntry } from "@/components/cart-entry";
 import { Button } from "@/styles/pages/cart";
 import { useEffect, useState } from "react";
 import axios from "axios";
