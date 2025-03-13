@@ -5,7 +5,7 @@ import Image from "next/image";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
-export function CartEntry({
+export default function CartEntry({
   entry,
   removeItem,
 }: {

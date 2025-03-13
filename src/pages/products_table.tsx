@@ -11,7 +11,7 @@ interface ProductsTableProps {
   products: Products[];
 }
 
-export function ProductsTable({ products }: ProductsTableProps) {
+export default function ProductsTable({ products }: ProductsTableProps) {
   const [sliderRef, sliderInstance] = useKeenSlider<HTMLDivElement>({
     slides: {
       perView: 3,
