@@ -21,6 +21,10 @@ interface SuccessProps {
   };
 }
 export default function Success({ customerName, product }: SuccessProps) {
+  const { clearCart } = useShoppingCart();
+  useEffect(() => {
+    clearCart();
+  });
   const [categoryType, setCategoryType] = useState("");
 
   useEffect(() => {
@@ -96,8 +100,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         customerEmail,
         items: [{ productId, name, quantity, price, category, size }],
       });
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    useShoppingCart().clearCart();
     if (response.status !== 201) {
       console.error("Erro ao criar pedido na Pizza API:", response.status);
       return {
