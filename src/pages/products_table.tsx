@@ -14,6 +14,7 @@ export default function ProductsTable({ products }: ProductsTableProps) {
   return (
     <HomeContainer>
       {products &&
+        products.length > 0 &&
         products.map((product) => {
           return (
             <Link
