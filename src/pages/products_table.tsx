@@ -10,9 +10,10 @@ interface ProductsTableProps {
 }
 
 export default function ProductsTable({ products }: ProductsTableProps) {
+  if (!products) return null;
   return (
     <HomeContainer>
-      {products.length > 0 &&
+      {products &&
         products.map((product) => {
           return (
             <Link
