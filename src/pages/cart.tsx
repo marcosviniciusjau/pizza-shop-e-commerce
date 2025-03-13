@@ -9,7 +9,7 @@ import { CartContainer, Total } from "@/styles/pages/cart-entry";
 import { Select } from "@/styles/pages/components/select";
 import { CartDiv } from "@/styles/pages/components/cart";
 
-export function Cart() {
+export default function Cart() {
   const [isMounted, setIsMounted] = useState(false);
   const { removeItem, cartDetails, clearCart, totalPrice } = useShoppingCart();
   const [quantity, setQuantity] = useState(1);
