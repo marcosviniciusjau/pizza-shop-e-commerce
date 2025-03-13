@@ -8,6 +8,7 @@ import Head from "next/head";
 import superagent from "superagent";
 import { env } from "@/env";
 import { useEffect, useState } from "react";
+import { useShoppingCart } from "use-shopping-cart";
 interface SuccessProps {
   customerName: string;
   customerEmail: string;
@@ -21,6 +22,7 @@ interface SuccessProps {
 }
 export default function Success({ customerName, product }: SuccessProps) {
   const [categoryType, setCategoryType] = useState("");
+
   useEffect(() => {
     if (product.category === "pizzas") {
       setCategoryType("Pizza");
@@ -94,7 +96,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         customerEmail,
         items: [{ productId, name, quantity, price, category, size }],
       });
-
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    useShoppingCart().clearCart();
     if (response.status !== 201) {
       console.error("Erro ao criar pedido na Pizza API:", response.status);
       return {
