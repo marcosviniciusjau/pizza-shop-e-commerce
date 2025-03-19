@@ -11,7 +11,8 @@ import Image from "next/image";
 import { CartActions } from "use-shopping-cart";
 import { Product as Products } from "use-shopping-cart/core";
 
-import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { useEffect, useState } from "react";
 interface ProductsCardsProps {
   products: Products[];
   addItem: CartActions["addItem"];
@@ -19,20 +20,27 @@ interface ProductsCardsProps {
 
 export function ProductsCard({ products, addItem }: ProductsCardsProps) {
   const [selectedProducts, setSelectedProducts] = useState<Products[]>([]);
-
   function selectPizza(isChecked: boolean, product: Products) {
     const productId = product.id;
+    if (!isChecked) {
+      selectedProducts.pop((item) => item === product);
+    }
     setSelectedProducts((prev) =>
       isChecked ? [...prev, product] : prev.filter((id) => id !== productId)
     );
   }
+  function addItemToCart(product) {
+    toast.success("Adicionou no carrinho");
+    addItem(product);
+  }
   return (
     <ProductContainer>
+      <ToastContainer />
       <FlavorContainer>
         <h1> Escolha até 2 sabores</h1>
         <Button
           onClick={() =>
-            selectedProducts.forEach((product) => addItem(product))
+            selectedProducts.forEach((product) => addItemToCart(product))
           }
         >
           Adicionar ao carrinho

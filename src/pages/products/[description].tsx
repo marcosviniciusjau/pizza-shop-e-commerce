@@ -17,10 +17,10 @@ interface ProductsCardsProps {
 export default function Products({ products }: ProductsCardsProps) {
   const [isSearching, setIsSearching] = useState(true);
   const [search, setSearch] = useState("");
-
+console.log(products)
   const [product, setProduct] = useState(products);
   const cart = useShoppingCart();
-  const { addItem } = cart;
+  const {addItem} = cart;
 
   function getName(search: string) {
     if (search.trim() === "") {
