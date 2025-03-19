@@ -50,6 +50,7 @@ export default function Success({ customerName, product }: SuccessProps) {
 
         <p>
           Uhuul <strong>{customerName}</strong>, sua{" "}
+          {categoryType}
           <strong> {product.name}
           </strong>{" "}
           já foi comprada e já está sendo preparada para entrega!
