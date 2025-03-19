@@ -22,7 +22,17 @@ interface SuccessProps {
 }
 export default function Success({ customerName, product }: SuccessProps) {
   const { clearCart } = useShoppingCart();
+  useEffect(() => {
+    clearCart();
+  },[clearCart]);
+
   const [categoryType, setCategoryType] = useState("");
+
+  useEffect(() => {
+    if (product.category === "pizzas") {
+      setCategoryType("Pizza");
+    }
+  }, [product.category]);
 
   return (
     <>
@@ -90,10 +100,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         customerEmail,
         items: [{ productId, name, quantity, price, category, size }],
       });
-    if (response.status !== 201) {
-      console.error("Erro ao criar pedido na Pizza API:", response.status);
-      console.log(response);
-    }
   } catch (err: any) {
     console.error(
       "Erro na requisição para Pizza API:",
@@ -101,6 +107,12 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       "Olha o erro",
       err
     );
+    return {
+      redirect: {
+        destination: "/error",
+        permanent: false,
+      },
+    };
   }
   return {
     props: {
