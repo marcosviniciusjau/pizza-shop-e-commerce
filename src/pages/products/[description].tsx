@@ -17,10 +17,9 @@ interface ProductsCardsProps {
 export default function Products({ products }: ProductsCardsProps) {
   const [isSearching, setIsSearching] = useState(true);
   const [search, setSearch] = useState("");
-console.log(products)
   const [product, setProduct] = useState(products);
   const cart = useShoppingCart();
-  const {addItem} = cart;
+  const { addItem } = cart;
 
   function getName(search: string) {
     if (search.trim() === "") {
@@ -92,7 +91,7 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params }) => {
   const description = params!.description;
   const productsResponse = await stripe.products.list({
-    expand: ["data.default_price"],
+    active: true,
   });
   const products = productsResponse.data;
   const pricesResponse = await stripe.prices.list({ limit: 70 });
@@ -110,11 +109,10 @@ export const getStaticProps: GetStaticProps<
       return {
         id: product.id,
         name: product.name,
-        description: product.description,
         size: product.prices[0].nickname,
-        imageUrl: product.images[0],
         price: product.prices[0].unit_amount! / 100,
-        priceId: product.prices[0].id,
+        description: product.description,
+        imageUrl: product.images[0],
       };
     });
 
